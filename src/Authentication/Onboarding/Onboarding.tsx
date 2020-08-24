@@ -3,12 +3,11 @@ import { StyleSheet, View, Dimensions, Text } from 'react-native'
 import Animated, { multiply, divide } from 'react-native-reanimated';
 import { interpolateColor, useScrollHandler } from 'react-native-redash';
 
-import Slide, { SLIDER_HEIGHT } from './Slide';
+import Slide, { SLIDER_HEIGHT, BORDER_RADIUS } from './Slide';
 import Subslide from './Subslide';
 import Dot from './Dot';
 
 const { width } = Dimensions.get('window');
-const BORDER_RADIUS = 75;
 
 const styles = StyleSheet.create({
     container: {
@@ -41,25 +40,29 @@ const slides = [
         title: "Relaxed", 
         subtitle: "Find Your Outfits", 
         description: "Confused about you outfit? Dont worry! Find the best outfit here!", 
-        color: "#BFEAF5"
+        color: "#BFEAF5",
+        picture: require('../../../assets/1.png')
     },
     { 
         title: "Playful", 
         subtitle: "Hear it First, Wear it First", 
         description: "Hating the clothes in your wardrobe? Explore hundreds of outfit ideas", 
-        color: "#BEECC4"
+        color: "#BEECC4",
+        picture: require('../../../assets/2.png')
     },
     { 
         title: "Excentric", 
         subtitle: "Your Style, Your Way", 
         description: "Create your individual & unique style and look amazing everyday", 
-        color: "#FFE4D9"
+        color: "#FFE4D9",
+        picture: require('../../../assets/3.png')
     },
     { 
         title: "Funky", 
         subtitle: "Look Good, Feel Good", 
         description: "Discover the latest trends in fashion and explore your personality", 
-        color: "#FFDDDD"
+        color: "#FFDDDD",
+        picture: require('../../../assets/4.png')
     }
 ]
 
@@ -83,8 +86,8 @@ const Onboarding = () => {
                     showsHorizontalScrollIndicator={false}
                     {...scrollHandler}
                 >
-                    {slides.map(({ title }, index) => (
-                        <Slide key={index} right={!!(index % 2)} {...{ title }} />
+                    {slides.map(({ title, picture }, index) => (
+                        <Slide key={index} right={!!(index % 2)} {...{ title, picture }} />
                     ))}
                 </Animated.ScrollView>
             </Animated.View>
