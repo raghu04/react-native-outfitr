@@ -7,6 +7,7 @@ import Slide, { SLIDER_HEIGHT } from './Slide';
 import Subslide from './Subslide';
 import Dot from './Dot';
 import { theme } from '../../components';
+import { StackNavigationProps, Routes } from '../../components/Navigation';
 
 const { width } = Dimensions.get('window');
 
@@ -20,13 +21,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         borderBottomRightRadius: theme.borderRadii.xl,
-        overflow: 'hidden'
-    },
-    picture: {
-        ...StyleSheet.absoluteFillObject,
-        width: undefined,
-        height: undefined,
-        borderBottomRightRadius: theme.borderRadii.xl
+        overflow: 'hidden',
     },
     slider: {
         height: SLIDER_HEIGHT,
@@ -57,8 +52,8 @@ const slides = [
         color: "#BFEAF5",
         picture: {
             src: require('../../../assets/1.png'),
-            width: 2513,
-            height: 3583
+            width: 3413,
+            height: 5503
         }
     },
     { 
@@ -68,8 +63,8 @@ const slides = [
         color: "#BEECC4",
         picture: {
             src: require('../../../assets/2.png'),
-            width: 2791,
-            height: 3744
+            width: 3091,
+            height: 5144
         }
     },
     { 
@@ -79,8 +74,8 @@ const slides = [
         color: "#FFE4D9",
         picture: {
             src: require('../../../assets/3.png'),
-            width: 2738,
-            height: 3244
+            width: 4080,
+            height: 6620
         }
     },
     { 
@@ -91,12 +86,12 @@ const slides = [
         picture: {
             src: require('../../../assets/4.png'),
             width: 1757,
-            height: 2551
+            height: 2851
         }
     }
 ]
 
-const Onboarding = () => {
+const Onboarding = ({ navigation }: StackNavigationProps<Routes, "Onboarding">) => {
     const scroll = useRef<Animated.ScrollView>(null);
     const { scrollHandler, x } = useScrollHandler();
     const backgroundColor = interpolateColor(x, {
@@ -119,10 +114,10 @@ const Onboarding = () => {
                     })
                     return (
                         <Animated.View style={[styles.underlay, { opacity }]} key={index}>
-                            <Image source={picture.src} style={[{
-                                // width: width - BORDER_RADIUS,
-                                // height: ((width - BORDER_RADIUS) * picture.height) / picture.width
-                            }, styles.picture]} />
+                            <Image source={picture.src} style={{
+                                width: width - theme.borderRadii.s,
+                                height: ((width - theme.borderRadii.xl) * picture.height) / picture.width,
+                            }} />
                         </Animated.View> 
                     )
                 })}
@@ -161,20 +156,25 @@ const Onboarding = () => {
                             width: width * slides.length
                         }}
                     >
-                        {slides.map(({ subtitle, description }, index) => (
-                            <Subslide 
-                                key={index} 
-                                onPress={() => {
-                                    if(scroll.current) {
-                                        scroll.current
-                                            .getNode()
-                                            .scrollTo({ x: width * (index + 1), animated: true })
-                                    }
-                                }}
-                                last={index === slides.length - 1} 
-                                {...{ subtitle, description }} 
-                            />
-                        ))}
+                        {slides.map(({ subtitle, description }, index) => {
+                            const last = index === slides.length - 1;
+
+                            return (
+                                <Subslide 
+                                    key={index} 
+                                    onPress={() => {
+                                        if (last) {
+                                            navigation.navigate('Welcome');
+                                        } else {
+                                            scroll.current
+                                                ?.getNode()
+                                                .scrollTo({ x: width * (index + 1), animated: true })
+                                        }
+                                    }}
+                                    {...{ subtitle, description, last }} 
+                                />
+                            )
+                        })}
                     </Animated.View>
                 </View>
             </View>
