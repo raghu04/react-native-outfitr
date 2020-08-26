@@ -1,11 +1,12 @@
 import React, { useRef } from 'react'
-import { StyleSheet, View, Dimensions, Text } from 'react-native'
-import Animated, { multiply, divide } from 'react-native-reanimated';
+import { StyleSheet, View, Dimensions, Image } from 'react-native'
+import Animated, { multiply, divide, interpolate, Extrapolate } from 'react-native-reanimated';
 import { interpolateColor, useScrollHandler } from 'react-native-redash';
 
-import Slide, { SLIDER_HEIGHT, BORDER_RADIUS } from './Slide';
+import Slide, { SLIDER_HEIGHT } from './Slide';
 import Subslide from './Subslide';
 import Dot from './Dot';
+import { theme } from '../../components';
 
 const { width } = Dimensions.get('window');
 
@@ -14,9 +15,22 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white'
     },
+    underlay: {
+        ...StyleSheet.absoluteFillObject,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        borderBottomRightRadius: theme.borderRadii.xl,
+        overflow: 'hidden'
+    },
+    picture: {
+        ...StyleSheet.absoluteFillObject,
+        width: undefined,
+        height: undefined,
+        borderBottomRightRadius: theme.borderRadii.xl
+    },
     slider: {
         height: SLIDER_HEIGHT,
-        borderBottomRightRadius: BORDER_RADIUS
+        borderBottomRightRadius: theme.borderRadii.xl
     },
     footer: {
         flex: 1
@@ -24,11 +38,11 @@ const styles = StyleSheet.create({
     footerContent: {
         flex: 1, 
         backgroundColor: 'white', 
-        borderTopLeftRadius: BORDER_RADIUS
+        borderTopLeftRadius: theme.borderRadii.xl
     },
     pagination: {
         ...StyleSheet.absoluteFillObject,
-        height: BORDER_RADIUS,
+        height: theme.borderRadii.xl,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
@@ -93,6 +107,26 @@ const Onboarding = () => {
     return (
         <View style={styles.container}>
             <Animated.View style={[styles.slider, { backgroundColor }]}>
+                {slides.map(({ picture }, index) => {
+                    const opacity = interpolate(x, {
+                        inputRange: [
+                            (index - 0.5) * width,
+                            index * width,
+                            (index + 0.5) * width
+                        ],
+                        outputRange: [0, 1, 0],
+                        extrapolate: Extrapolate.CLAMP
+                    })
+                    return (
+                        <Animated.View style={[styles.underlay, { opacity }]} key={index}>
+                            <Image source={picture.src} style={[{
+                                // width: width - BORDER_RADIUS,
+                                // height: ((width - BORDER_RADIUS) * picture.height) / picture.width
+                            }, styles.picture]} />
+                        </Animated.View> 
+                    )
+                })}
+                
                 <Animated.ScrollView
                     ref={scroll}
                     horizontal 
@@ -102,8 +136,8 @@ const Onboarding = () => {
                     showsHorizontalScrollIndicator={false}
                     {...scrollHandler}
                 >
-                    {slides.map(({ title, picture }, index) => (
-                        <Slide key={index} right={!!(index % 2)} {...{ title, picture }} />
+                    {slides.map(({ title }, index) => (
+                        <Slide key={index} right={!!(index % 2)} {...{ title }} />
                     ))}
                 </Animated.ScrollView>
             </Animated.View>
