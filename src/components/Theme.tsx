@@ -6,7 +6,8 @@ const theme = createTheme({
     secondary: "#0C0D34",
     text: "rgba(12, 13, 52, 0.7)",
     grey: "rgba(12, 13, 52, 0.05)",
-    white: "white"
+    white: "white",
+    danger: "#FF0058"
   },
   spacing: {
     s: 8,
@@ -22,28 +23,28 @@ const theme = createTheme({
   },
   textVariants: {
     hero: {
-        fontSize: 80,
-        lineHeight: 80,
-        fontFamily: 'SFProDisplay-Bold',
-        color: 'white',
-        textAlign: 'center'
+      fontSize: 80,
+      lineHeight: 80,
+      fontFamily: 'SFProDisplay-Bold',
+      color: 'white',
+      textAlign: 'center'
     },
     title1: {
-        fontSize: 28,
-        fontFamily: 'SFProDisplay-Semibold',
-        color: "secondary"
+      fontSize: 28,
+      fontFamily: 'SFProDisplay-Semibold',
+      color: "secondary"
     },
     title2: {
-        fontSize: 24,
-        lineHeight: 30,
-        fontFamily: 'SFProDisplay-Semibold',
-        color: "secondary"
+      fontSize: 24,
+      lineHeight: 30,
+      fontFamily: 'SFProDisplay-Semibold',
+      color: "secondary"
     },
     body: {
-        fontSize: 16,
-        lineHeight: 24,
-        fontFamily: 'SFProDisplay-Regular',
-        color: "text"
+      fontSize: 16,
+      lineHeight: 24,
+      fontFamily: 'SFProDisplay-Regular',
+      color: "text"
     },
     button: {
       fontSize: 15,
