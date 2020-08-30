@@ -89,7 +89,8 @@ const slides = [
             height: 2851
         }
     }
-]
+];
+export const assets = slides.map((slide) => slide.picture.src);
 
 const Onboarding = ({ navigation }: StackNavigationProps<Routes, "Onboarding">) => {
     const scroll = useRef<Animated.ScrollView>(null);

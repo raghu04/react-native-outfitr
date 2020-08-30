@@ -9,6 +9,7 @@ const picture = {
     width: 3583,
     height: 4490
 }
+export const assets = [picture.src];
 
 const Welcome = () => {
     return (
