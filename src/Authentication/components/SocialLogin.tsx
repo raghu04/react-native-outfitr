@@ -1,9 +1,6 @@
 import React, { ReactNode } from 'react'
 import Svg, { Path } from 'react-native-svg'
-import { Box, theme } from '../../components'
-import App from '../../../App'
-
-const SIZE = theme.borderRadii.l * 2
+import { Box, useTheme } from '../../components'
 
 interface SocialIconProps {
     children: ReactNode;
@@ -55,6 +52,9 @@ const Apple = () => (
 )
 
 const SocialIcon = ({children}: SocialIconProps) => {
+  const theme = useTheme();
+  const SIZE = theme.borderRadii.l * 2
+
     return (
         <Box 
             width={SIZE} 
