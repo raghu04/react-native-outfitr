@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import { Image, Dimensions, StyleSheet, StatusBar } from 'react-native'
 import { Box, useTheme } from './Theme'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export const assets = [require('./assets/pattrens/1.jpg')]
 const { width } = Dimensions.get('window');
@@ -13,11 +14,11 @@ interface ContainerProps {
     footer: ReactNode;
 }
 
-const Container = ({children, footer}: ContainerProps) => {
+const Container = ({ children, footer }: ContainerProps) => {
 
     const insets = useSafeAreaInsets();
     const theme = useTheme();
-    
+
     return (
         <Box flex={1} backgroundColor="secondary">
             <StatusBar barStyle="light-content" />
@@ -25,15 +26,15 @@ const Container = ({children, footer}: ContainerProps) => {
                 <Box
                     borderBottomLeftRadius="xl"
                     overflow="hidden"
-                    height={ height * 0.60 }
+                    height={height * 0.60}
                 >
-                    <Image 
-                        source={assets[0]} 
-                        style={{ 
-                            width, 
-                            height, 
-                            borderBottomLeftRadius: theme.borderRadii.xl 
-                        }} 
+                    <Image
+                        source={assets[0]}
+                        style={{
+                            width,
+                            height,
+                            borderBottomLeftRadius: theme.borderRadii.xl
+                        }}
                     />
                 </Box>
             </Box>
@@ -53,7 +54,9 @@ const Container = ({children, footer}: ContainerProps) => {
                     backgroundColor="white"
                     borderTopLeftRadius={0}
                 >
-                    {children}
+                    <KeyboardAwareScrollView>
+                        {children}
+                    </KeyboardAwareScrollView>
                 </Box>
             </Box>
             <Box backgroundColor="secondary" paddingTop="m">
