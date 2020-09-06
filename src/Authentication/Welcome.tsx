@@ -1,12 +1,12 @@
 import React from 'react'
-import { Box, Text } from '../../components'
+import { Box, Text } from '../components'
 import { Image, Dimensions } from 'react-native'
-import { useTheme, Button } from '../../components'
-import { StackNavigationProps, Routes } from '../../components/Navigation';
+import { useTheme, Button } from '../components'
+import { StackNavigationProps, Routes } from '../components/Navigation';
 const { width } = Dimensions.get('window');
 
 const picture = {
-    src: require('../../../assets/5.png'),
+    src: require('../../assets/5.png'),
     width: 3583,
     height: 4490
 }

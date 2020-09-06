@@ -4,10 +4,12 @@ import { createTheme, createText, createBox, useTheme as useReTheme } from '@sho
 export const theme = createTheme({
   colors: {
     primary: "#2CB9B0",
+    primaryLight: "#E7F9F7",
     secondary: "#0C0D34",
     text: "rgba(12, 13, 52, 0.7)",
     grey: "rgba(12, 13, 52, 0.05)",
     white: "white",
+    black: "black",
     danger: "#FF0058"
   },
   spacing: {
