@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import { TextInput as RNTextInput } from 'react-native'
 
 import { StackNavigationProps, Routes } from '../components/Navigation';
 import { Container, Button, Text, Box } from '../components'
@@ -26,7 +27,7 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
             onPress={() => navigation.navigate("SignUp")}
         />
     )
-    const passwordRef = useRef<typeof TextInput>(null);
+    const passwordRef = useRef<RNTextInput>(null);
     const {
         handleChange,
         handleBlur,
