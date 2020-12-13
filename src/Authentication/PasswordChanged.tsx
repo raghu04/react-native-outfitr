@@ -8,7 +8,7 @@ const SIZE = 70;
 const PasswordChanged = ({ navigation }: StackNavigationProps<Routes, "PasswordChanged">) => {
 
     return (
-        <Container footer={
+        <Container pattren={0} footer={
             <Box flexDirection="row" justifyContent="center">
                 <CloseButton onPress={() => navigation.navigate("Login") } />
             </Box>

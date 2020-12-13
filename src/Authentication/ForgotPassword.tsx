@@ -3,7 +3,7 @@ import { Linking } from 'react-native'
 
 import { StackNavigationProps, Routes } from '../components/Navigation';
 import { Container, Button, Text, Box } from '../components'
-import TextInput from './components/Form/TextInput';
+import TextInput from '../components/Form/TextInput';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Footer from './components/Footer';
@@ -26,10 +26,8 @@ const ForgotPassword = ({ navigation }: StackNavigationProps<Routes, "ForgotPass
         handleChange,
         handleBlur,
         handleSubmit,
-        values,
         errors,
         touched,
-        setFieldValue
     } = useFormik({
         initialValues: { email: '' },
         validationSchema: ForgotPasswordSchema,
@@ -37,7 +35,7 @@ const ForgotPassword = ({ navigation }: StackNavigationProps<Routes, "ForgotPass
     });
 
     return (
-        <Container {...{ footer }}>
+        <Container pattren={2} {...{ footer }}>
             <Box flex={1} justifyContent="center" padding="xl">
                 <Text variant="title1" textAlign="center" marginBottom="l">
                     Forgot password?

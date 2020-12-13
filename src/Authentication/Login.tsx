@@ -3,8 +3,8 @@ import { TextInput as RNTextInput } from 'react-native'
 
 import { StackNavigationProps, Routes } from '../components/Navigation';
 import { Container, Button, Text, Box } from '../components'
-import TextInput from './components/Form/TextInput';
-import CheckBox from './components/Form/CheckBox';
+import TextInput from '../components/Form/TextInput';
+import CheckBox from '../components/Form/CheckBox';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Footer from './components/Footer';
@@ -43,7 +43,7 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
     });
 
     return (
-        <Container {...{ footer }}>
+        <Container pattren={0} {...{ footer }}>
             <Box padding="xl">
                 <Text variant="title1" textAlign="center" marginBottom="l">
                     Welcome back

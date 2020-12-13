@@ -5,7 +5,7 @@ import { TextInput as RNTextInput } from 'react-native'
 import { Container, Box, Text, Button } from '../components'
 import Footer from './components/Footer'
 import { StackNavigationProps, Routes } from '../components/Navigation'
-import TextInput from './components/Form/TextInput'
+import TextInput from '../components/Form/TextInput'
 import { useFormik } from 'formik'
 
 const SignUpSchema = Yup.object().shape({
@@ -49,7 +49,7 @@ const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
     });
 
     return (
-        <Container {...{ footer }}>
+        <Container pattren={1} {...{ footer }}>
             <Box padding="xl">
                 <Text variant="title1" textAlign="center" marginBottom="l">
                     Create account
